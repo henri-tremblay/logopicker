@@ -27,9 +27,6 @@ public class Logo implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
-    private String description;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "cloud")
     private CloudType cloud;
@@ -57,19 +54,6 @@ public class Logo implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Logo description(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public CloudType getCloud() {
@@ -124,7 +108,6 @@ public class Logo implements Serializable {
         return "Logo{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", description='" + getDescription() + "'" +
             ", cloud='" + getCloud() + "'" +
             ", url='" + getUrl() + "'" +
             "}";

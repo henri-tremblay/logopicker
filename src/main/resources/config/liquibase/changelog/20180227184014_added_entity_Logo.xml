@@ -26,10 +26,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="description" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="cloud" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -40,7 +36,11 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/logo.csv"
+                  separator=";"
+                  tableName="logo"/>
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

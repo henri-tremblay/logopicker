@@ -43,9 +43,6 @@ public class LogoResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
-
     private static final CloudType DEFAULT_CLOUD = CloudType.LOCALHOST;
     private static final CloudType UPDATED_CLOUD = CloudType.HEROKU;
 
@@ -94,7 +91,6 @@ public class LogoResourceIntTest {
     public static Logo createEntity(EntityManager em) {
         Logo logo = new Logo()
             .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION)
             .cloud(DEFAULT_CLOUD)
             .url(DEFAULT_URL);
         return logo;
@@ -121,7 +117,6 @@ public class LogoResourceIntTest {
         assertThat(logoList).hasSize(databaseSizeBeforeCreate + 1);
         Logo testLogo = logoList.get(logoList.size() - 1);
         assertThat(testLogo.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testLogo.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testLogo.getCloud()).isEqualTo(DEFAULT_CLOUD);
         assertThat(testLogo.getUrl()).isEqualTo(DEFAULT_URL);
     }
@@ -157,7 +152,6 @@ public class LogoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(logo.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].cloud").value(hasItem(DEFAULT_CLOUD.toString())))
             .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())));
     }
@@ -174,7 +168,6 @@ public class LogoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(logo.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.cloud").value(DEFAULT_CLOUD.toString()))
             .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()));
     }
@@ -201,7 +194,6 @@ public class LogoResourceIntTest {
         em.detach(updatedLogo);
         updatedLogo
             .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION)
             .cloud(UPDATED_CLOUD)
             .url(UPDATED_URL);
 
@@ -215,7 +207,6 @@ public class LogoResourceIntTest {
         assertThat(logoList).hasSize(databaseSizeBeforeUpdate);
         Logo testLogo = logoList.get(logoList.size() - 1);
         assertThat(testLogo.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testLogo.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testLogo.getCloud()).isEqualTo(UPDATED_CLOUD);
         assertThat(testLogo.getUrl()).isEqualTo(UPDATED_URL);
     }

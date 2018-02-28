@@ -7,10 +7,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "description",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "cloud",
             "fieldType": "CloudType",
             "fieldValues": "LOCALHOST,HEROKU,ORACLE,AWS,AZURE,CLOUD_FOUNDRY"

@@ -68,7 +68,7 @@ class LogoGatlingTest extends Simulation {
             .exec(http("Create new logo")
             .post("/logopicker/api/logos")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "cloud":null, "url":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "cloud":null, "url":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_logo_url"))).exitHereIfFailed
             .pause(10)
