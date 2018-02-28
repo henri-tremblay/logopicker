@@ -1,6 +1,7 @@
 package pro.tremblay.logopicker.service;
 
 import pro.tremblay.logopicker.domain.Logo;
+import pro.tremblay.logopicker.domain.enumeration.CloudType;
 import pro.tremblay.logopicker.repository.LogoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,5 +67,26 @@ public class LogoService {
     public void delete(Long id) {
         log.debug("Request to delete Logo : {}", id);
         logoRepository.delete(id);
+    }
+
+    /**
+     * Get current logo.
+     *
+     * @return the entity
+     */
+    @Transactional(readOnly = true)
+    public Logo findCurrent() {
+        log.debug("Request to get current Logo");
+        CloudType type = deduceCloudType();
+        return logoRepository.findByCloud(type);
+    }
+
+    /**
+     * Deduce the cloud type from the environment
+     *
+     * @return cloud type
+     */
+    public CloudType deduceCloudType() {
+        return CloudType.HEROKU;
     }
 }

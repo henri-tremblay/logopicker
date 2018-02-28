@@ -1,6 +1,8 @@
 package pro.tremblay.logopicker.repository;
 
 import pro.tremblay.logopicker.domain.Logo;
+import pro.tremblay.logopicker.domain.enumeration.CloudType;
+import org.springframework.cloud.Cloud;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -13,4 +15,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface LogoRepository extends JpaRepository<Logo, Long> {
 
+    Logo findByCloud(CloudType cloud);
 }

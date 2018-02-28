@@ -115,4 +115,17 @@ public class LogoResource {
         logoService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * GET  /logos/current : get the current logo.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the logo, or with status 404 (Not Found)
+     */
+    @GetMapping("/logos/current")
+    @Timed
+    public ResponseEntity<Logo> getCurrentLogo() {
+        log.debug("REST request to get current Logo");
+        Logo logo = logoService.findCurrent();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(logo));
+    }
 }

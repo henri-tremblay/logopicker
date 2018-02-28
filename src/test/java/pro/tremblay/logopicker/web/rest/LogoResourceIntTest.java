@@ -40,13 +40,13 @@ import pro.tremblay.logopicker.domain.enumeration.CloudType;
 @SpringBootTest(classes = LogopickerApp.class)
 public class LogoResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String DEFAULT_NAME = "Heroku";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final CloudType DEFAULT_CLOUD = CloudType.LOCALHOST;
-    private static final CloudType UPDATED_CLOUD = CloudType.HEROKU;
+    private static final CloudType DEFAULT_CLOUD = CloudType.HEROKU;
+    private static final CloudType UPDATED_CLOUD = CloudType.LOCALHOST;
 
-    private static final String DEFAULT_URL = "AAAAAAAAAA";
+    private static final String DEFAULT_URL = "https://cdn-images-1.medium.com/max/1600/1*9wOLuKSjCIAqSX_K8O0PKQ.png";
     private static final String UPDATED_URL = "BBBBBBBBBB";
 
     @Autowired
@@ -260,5 +260,17 @@ public class LogoResourceIntTest {
         assertThat(logo1).isNotEqualTo(logo2);
         logo1.setId(null);
         assertThat(logo1).isNotEqualTo(logo2);
+    }
+
+    @Test
+    @Transactional
+    public void getCurrentLogo() throws Exception {
+        // Get the logo
+        restLogoMockMvc.perform(get("/api/logos/current"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.cloud").value(DEFAULT_CLOUD.toString()))
+            .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()));
     }
 }
