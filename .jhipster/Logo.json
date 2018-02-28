@@ -9,7 +9,7 @@
         {
             "fieldName": "cloud",
             "fieldType": "CloudType",
-            "fieldValues": "LOCALHOST,HEROKU,ORACLE,AWS,AZURE,CLOUD_FOUNDRY"
+            "fieldValues": "LOCALHOST,HEROKU,ORACLE,AWS,AZURE,CLOUD_FOUNDRY,UNKNOWN"
         },
         {
             "fieldName": "url",
