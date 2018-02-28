@@ -80,3 +80,10 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Setting up Continuous Integration]: http://www.jhipster.tech/documentation-archive/v4.14.0/setting-up-ci/
 
 [Gatling]: http://gatling.io/
+
+## Deployment
+
+* [JHipster Registry](https://henri-jhipster-registry.herokuapp.com/#/)
+* [URL to get application](http://localhost:8761/api/eureka/applications)
+
+## Heroku
