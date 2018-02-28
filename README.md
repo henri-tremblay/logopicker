@@ -84,6 +84,11 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 ## Deployment
 
 * [JHipster Registry](https://henri-jhipster-registry.herokuapp.com/#/)
-* [URL to get application](http://localhost:8761/api/eureka/applications)
+
+```bash
+# could be admin:admin@ is authentication was there
+curl https://henri-jhipster-registry.herokuapp.com/eureka/applications -H 'Content-Type: application/json' -H "Accept: application/json"
+curl https://henri-jhipster-registry.herokuapp.com/eureka/apps/{instance-name} -H 'Content-Type: application/json' -H "Accept: application/json"
+```
 
 ## Heroku
