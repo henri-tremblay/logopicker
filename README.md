@@ -83,18 +83,46 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 
 ## Deployment
 
-* [JHipster Registry](https://henri-jhipster-registry.herokuapp.com/#/)
+### Start frontend
+
+```bash
+ng server --open
+```
+
+### Local
+
+```bash
+docker-compose -f src/main/docker/mysql.yml up -d
+mvn -Pprod
+```
+
+### Heroku
+
+### Troubleshooting
+
+* [JHipster Registry](https://henri-jhipster-registry.herokuapp.com)
 
 ```bash
 # could be admin:admin@ is authentication was there
-curl https://henri-jhipster-registry.herokuapp.com/eureka/applications -H 'Content-Type: application/json' -H "Accept: application/json"
-curl https://henri-jhipster-registry.herokuapp.com/eureka/apps/LOGOPICKER -H 'Content-Type: application/json' -H "Accept: application/json"
+curl -H 'Content-Type: application/json' -H "Accept: application/json" https://henri-jhipster-registry.herokuapp.com/api/eureka/applications
+curl -H 'Content-Type: application/json' -H "Accept: application/json" https://henri-jhipster-registry.herokuapp.com/eureka/apps/LOGOPICKER
 curl http://localhost:8080/api/logos/current
 ```
 
-## Local
+Database cleanup:
 
 ```bash
-export JHIPSTER_REGISTRY_PASSWORD=xxx; mvn -Pprod
+docker exec -ti docker_logopicker-mysql_1 mysql
 ```
-## Heroku
+
+```sql
+use logopicker
+drop table logo;
+drop table jhi_persistent_audit_evt_data;
+drop table jhi_persistent_audit_event;
+drop table databasechangelog;
+drop table databasechangeloglock;
+show tables;
+```
+
+Env: [http://localhost:8080/management/env](http://localhost:8080/management/env)

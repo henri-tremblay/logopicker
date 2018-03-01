@@ -1,0 +1,34 @@
+{
+    "applications": [
+        {
+            "name": "LOGOPICKER",
+            "instances": [
+                {
+                    "metadata": {
+                        "zone": "primary",
+                        "profile": "prod",
+                        "version": "0.0.1-SNAPSHOT"
+                    },
+                    "instanceId": "logopicker:e185d55cdb666d5d04bda769cd90aab9",
+                    "healthCheckUrl": "http://172.17.0.5:8080/management/health",
+                    "statusPageUrl": "http://172.17.0.5:8080/management/info",
+                    "homePageUrl": "http://172.17.0.5:8080/",
+                    "status": "UP"
+                },
+                {
+                    "metadata": {
+                        "zone": "henri",
+                        "profile": "prod",
+                        "version": "0.0.1-SNAPSHOT"
+                    },
+                    "instanceId": "logopicker:5e2da9607d34b63dcdcf58b3c620e808",
+                    "healthCheckUrl": "http://192.168.0.135:8080/management/health",
+                    "statusPageUrl": "http://192.168.0.135:8080/management/info",
+                    "homePageUrl": "http://192.168.0.135:8080/",
+                    "status": "UP"
+                }
+            ]
+        }
+    ],
+    "status": null
+}

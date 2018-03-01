@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs/Observable';
-import { catchError, map, tap } from "rxjs/operators";
+import { catchError, map, tap, single, switchMap } from "rxjs/operators";
+import { of } from "rxjs/observable/of";
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { CloudType, Logo } from './logo';
-import { of } from "rxjs/observable/of";
 
 import {Application, Eureka} from "./application";
 
@@ -19,15 +19,20 @@ const httpOptions = {
 @Injectable()
 export class AppService {
 
-  private registryUrl = 'http://localhost:8761';
-  // private registryUrl = 'https://henri-jhipster-registry.herokuapp.com';
+  // private registryUrl = 'http://localhost:8761';
+  private registryUrl = 'https://henri-jhipster-registry.herokuapp.com';
+
+  // Change the zone here and in spring (eureka.instance.metadata-map.zone) to have your own zone
+  private zone = 'primary';
 
   constructor(private http: HttpClient) { }
 
   getServer(): Observable<string> {
     return this.http.get<Eureka>(this.registryUrl + '/api/eureka/applications', httpOptions)
       .pipe(
-        map(eureka => eureka.applications[0].instances[0].homePageUrl)
+        switchMap(eureka => eureka.applications[0].instances),
+        single(instance => instance.metadata.zone === this.zone),
+        map( instance => instance.homePageUrl)
       );
   }
 

@@ -9,4 +9,9 @@ export class Application {
 
 export class Instance {
   homePageUrl: string;
+  metadata: Metadata;
+}
+
+export class Metadata {
+  zone: string;
 }

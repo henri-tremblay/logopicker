@@ -10,7 +10,7 @@ import { AppService } from "./app.service";
 export class AppComponent {
   logo: Logo = {
     id: 1,
-    name: 'Loading',
+    name: 'le Cloud',
     cloud: CloudType.UNKNOWN,
     url: '/assets/unknown.png'
   };
@@ -24,7 +24,7 @@ export class AppComponent {
   getLogo(): void {
     this.appService.getServer()
        .subscribe(serverUrl => {
-         this.appService.getLogo(serverUrl + '/api/logos/current')
+         this.appService.getLogo(serverUrl + 'api/logos/current')
            .subscribe(logo => this.logo = logo);
        });
   }

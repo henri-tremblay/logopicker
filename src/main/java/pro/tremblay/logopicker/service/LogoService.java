@@ -5,6 +5,7 @@ import pro.tremblay.logopicker.domain.enumeration.CloudType;
 import pro.tremblay.logopicker.repository.LogoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,9 +21,11 @@ public class LogoService {
     private final Logger log = LoggerFactory.getLogger(LogoService.class);
 
     private final LogoRepository logoRepository;
+    private final Environment environment;
 
-    public LogoService(LogoRepository logoRepository) {
+    public LogoService(LogoRepository logoRepository, Environment environment) {
         this.logoRepository = logoRepository;
+        this.environment = environment;
     }
 
     /**
@@ -87,6 +90,9 @@ public class LogoService {
      * @return cloud type
      */
     public CloudType deduceCloudType() {
-        return CloudType.HEROKU;
+        if(environment.getProperty("spring.datasource.url").startsWith("jdbc:mysql://localhost:3306")) {
+            return CloudType.LOCALHOST;
+        }
+        return CloudType.UNKNOWN;
     }
 }
