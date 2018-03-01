@@ -127,10 +127,6 @@ public class LogoResource {
     public ResponseEntity<Logo> getCurrentLogo() {
         log.debug("REST request to get current Logo");
         Logo logo = logoService.findCurrent();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(logo), headers);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(logo));
     }
 }

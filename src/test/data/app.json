@@ -1,0 +1,50 @@
+{
+    "application": {
+        "name": "LOGOPICKER",
+        "instance": [
+            {
+                "instanceId": "logopicker:4b265576132b8ec9e7b5862d16037b1e",
+                "hostName": "192.168.0.135",
+                "app": "LOGOPICKER",
+                "ipAddr": "192.168.0.135",
+                "status": "UP",
+                "overriddenstatus": "UNKNOWN",
+                "port": {
+                    "$": 8080,
+                    "@enabled": "true"
+                },
+                "securePort": {
+                    "$": 443,
+                    "@enabled": "false"
+                },
+                "countryId": 1,
+                "dataCenterInfo": {
+                    "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+                    "name": "MyOwn"
+                },
+                "leaseInfo": {
+                    "renewalIntervalInSecs": 5,
+                    "durationInSecs": 10,
+                    "registrationTimestamp": 1519922889687,
+                    "lastRenewalTimestamp": 1519922918754,
+                    "evictionTimestamp": 0,
+                    "serviceUpTimestamp": 1519922888944
+                },
+                "metadata": {
+                    "zone": "primary",
+                    "profile": "dev",
+                    "version": "0.0.1-SNAPSHOT"
+                },
+                "homePageUrl": "http://192.168.0.135:8080/",
+                "statusPageUrl": "http://192.168.0.135:8080/management/info",
+                "healthCheckUrl": "http://192.168.0.135:8080/management/health",
+                "vipAddress": "logopicker",
+                "secureVipAddress": "logopicker",
+                "isCoordinatingDiscoveryServer": "false",
+                "lastUpdatedTimestamp": "1519922889690",
+                "lastDirtyTimestamp": "1519922885989",
+                "actionType": "ADDED"
+            }
+        ]
+    }
+}

@@ -1,11 +1,13 @@
 import { Observable } from 'rxjs/Observable';
-import { catchError } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { CloudType, Logo } from './logo';
 import { of } from "rxjs/observable/of";
+
+import {Application, Eureka} from "./application";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,12 +19,16 @@ const httpOptions = {
 @Injectable()
 export class AppService {
 
-  private registryUrl = 'https://henri-jhipster-registry.herokuapp.com';
+  private registryUrl = 'http://localhost:8761';
+  // private registryUrl = 'https://henri-jhipster-registry.herokuapp.com';
 
   constructor(private http: HttpClient) { }
 
   getServer(): Observable<string> {
-    return this.http.get<string>(this.registryUrl + '/eureka/apps/LOGOPICKER', httpOptions);
+    return this.http.get<Eureka>(this.registryUrl + '/api/eureka/applications', httpOptions)
+      .pipe(
+        map(eureka => eureka.applications[0].instances[0].homePageUrl)
+      );
   }
 
   getLogo(logoUrl : string): Observable<Logo> {
@@ -57,7 +63,7 @@ export class AppService {
       id: 1,
       name: 'the Storm!',
       cloud: CloudType.UNKNOWN,
-      url: 'https://openclipart.org/image/2400px/svg_to_png/22010/nicubunu-Weather-Symbols-Storm.png'
+      url: '/assets/storm.png'
     };
   }
 

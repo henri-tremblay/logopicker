@@ -12,7 +12,7 @@ export class AppComponent {
     id: 1,
     name: 'Loading',
     cloud: CloudType.UNKNOWN,
-    url: 'https://i.ytimg.com/vi/OStPrcq52ZA/maxresdefault.jpg'
+    url: '/assets/unknown.png'
   };
 
   constructor(private appService: AppService) { }
@@ -22,9 +22,10 @@ export class AppComponent {
   }
 
   getLogo(): void {
-    // this.appService.getServer()
-    //   .subscribe(registry => console.log(registry));
-    this.appService.getLogo('http://localhost:8081/api/logos/current')
-      .subscribe(logo => this.logo = logo);
+    this.appService.getServer()
+       .subscribe(serverUrl => {
+         this.appService.getLogo(serverUrl + '/api/logos/current')
+           .subscribe(logo => this.logo = logo);
+       });
   }
 }
