@@ -10,11 +10,11 @@ version="0.0.1-SNAPSHOT"
 echo "Deploying to Heroku"
 
 # Build the release if not there
-if [ ! -f "target/hardbacon-${version}.war" ]; then
+if [ ! -f "target/logopicker-${version}.war" ]; then
     ./mvnw clean package -Pprod  -DskipTests
 fi
 
 # Deploy
-heroku deploy:jar --jar target/hardbacon-${version}.war
+heroku deploy:jar --jar target/logopicker-${version}.war
 
 echo "Deployment done"

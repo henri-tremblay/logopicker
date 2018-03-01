@@ -1,5 +1,6 @@
 package pro.tremblay.logopicker.service;
 
+import io.github.jhipster.config.JHipsterConstants;
 import pro.tremblay.logopicker.domain.Logo;
 import pro.tremblay.logopicker.domain.enumeration.CloudType;
 import pro.tremblay.logopicker.repository.LogoRepository;
@@ -90,9 +91,13 @@ public class LogoService {
      * @return cloud type
      */
     public CloudType deduceCloudType() {
+        if(environment.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_HEROKU)) {
+            return CloudType.HEROKU;
+        }
         if(environment.getProperty("spring.datasource.url").startsWith("jdbc:mysql://localhost:3306")) {
             return CloudType.LOCALHOST;
         }
+
         return CloudType.UNKNOWN;
     }
 }

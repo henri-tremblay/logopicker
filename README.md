@@ -83,6 +83,11 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 
 ## Deployment
 
+### Configure
+
+* Set zone to whatever you want in `src/main/resources/config/application.yml`
+* Set the same zone in `frontend/src/app/app.service.ts`
+
 ### Start frontend
 
 ```bash
@@ -97,6 +102,19 @@ mvn -Pprod
 ```
 
 ### Heroku
+
+```bash
+./deploy_heroku.sh
+heroku ps:scale web=0
+```
+
+### Google Cloud Platform
+
+### Amazon Beanstalk
+
+### Microsoft Azure
+
+### Cloud Foundry
 
 ### Troubleshooting
 
