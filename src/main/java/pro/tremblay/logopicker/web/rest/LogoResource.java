@@ -8,6 +8,7 @@ import pro.tremblay.logopicker.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -126,6 +127,10 @@ public class LogoResource {
     public ResponseEntity<Logo> getCurrentLogo() {
         log.debug("REST request to get current Logo");
         Logo logo = logoService.findCurrent();
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(logo));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(logo), headers);
     }
 }

@@ -22,7 +22,9 @@ export class AppComponent {
   }
 
   getLogo(): void {
-    this.appService.getLogo()
+    // this.appService.getServer()
+    //   .subscribe(registry => console.log(registry));
+    this.appService.getLogo('http://localhost:8081/api/logos/current')
       .subscribe(logo => this.logo = logo);
   }
 }

@@ -1,21 +1,32 @@
 import { Observable } from 'rxjs/Observable';
-import {catchError} from "rxjs/operators";
+import { catchError } from "rxjs/operators";
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import {CloudType, Logo} from './logo';
-import {of} from "rxjs/observable/of";
+import { CloudType, Logo } from './logo';
+import { of } from "rxjs/observable/of";
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  })
+};
 
 @Injectable()
 export class AppService {
 
-  private logoUrl = 'api/logo';
+  private registryUrl = 'https://henri-jhipster-registry.herokuapp.com';
 
   constructor(private http: HttpClient) { }
 
-  getLogo(): Observable<Logo> {
-    return this.http.get<Logo>(this.logoUrl)
+  getServer(): Observable<string> {
+    return this.http.get<string>(this.registryUrl + '/eureka/apps/LOGOPICKER', httpOptions);
+  }
+
+  getLogo(logoUrl : string): Observable<Logo> {
+    return this.http.get<Logo>(logoUrl)
       .pipe(
         catchError(this.handleError('getLogo', this.failedLogo()))
       );

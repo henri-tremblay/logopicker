@@ -88,7 +88,13 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 ```bash
 # could be admin:admin@ is authentication was there
 curl https://henri-jhipster-registry.herokuapp.com/eureka/applications -H 'Content-Type: application/json' -H "Accept: application/json"
-curl https://henri-jhipster-registry.herokuapp.com/eureka/apps/{instance-name} -H 'Content-Type: application/json' -H "Accept: application/json"
+curl https://henri-jhipster-registry.herokuapp.com/eureka/apps/LOGOPICKER -H 'Content-Type: application/json' -H "Accept: application/json"
+curl http://localhost:8081/api/logos/current
 ```
 
+## Local
+
+```bash
+export JHIPSTER_REGISTRY_PASSWORD=xxx; mvn -Pprod
+```
 ## Heroku
