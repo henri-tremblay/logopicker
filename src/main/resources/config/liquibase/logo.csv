@@ -1,8 +1,8 @@
 id;cloud;name;url
-1;LOCALHOST;Localhost;http://fossbytes.com/wp-content/uploads/2016/10/localhost-127.0.0.1.jpg
-2;HEROKU;Heroku;https://cdn-images-1.medium.com/max/1600/1*9wOLuKSjCIAqSX_K8O0PKQ.png
-3;ORACLE;Oracle Cloud;https://zdnet3.cbsistatic.com/hub/i/r/2018/01/17/d81bb14c-017d-4876-bae9-f30be1ced1ad/thumbnail/770x578/c84ff8bbbeb6d968dacae46cfdc3b212/oracle-cloud-logo.png
-4;AWS;Amazon Web Services;https://a0.awsstatic.com/main/images/logos/aws_logo_smile_1200x630.png
-5;AZURE;Microsoft Azure;https://www.onmsft.com/wp-content/uploads/2017/09/Azure.png
-6;CLOUD_FOUNDRY;Cloud Foundry;https://www.cloudfoundry.org/wp-content/uploads/2017/01/CFF_Logo_rgb.png
-7;UNKNOWN;Unknown;https://cdn2.iconfinder.com/data/icons/color-svg-cloud-icons/512/cloud_status-512.png
+1;LOCALHOST;Localhost;/assets/localhost.jpg
+2;HEROKU;Heroku;/assets/heroku.png
+3;ORACLE;Oracle Cloud;/assets/oracle.png
+4;AWS;Amazon Web Services;/assets/aws/png
+5;AZURE;Microsoft Azure;/assets/azure.png
+6;CLOUD_FOUNDRY;Cloud Foundry;/assets/cloudfoundry.png
+7;UNKNOWN;Unknown;/assets/unknown.png
