@@ -158,7 +158,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <!--<scope>test</scope>-->
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
@@ -567,12 +567,12 @@
                 <configuration>
                     <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
                     <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
-                    <driver>org.h2.Driver</driver>
-                    <url>jdbc:h2:file:./target/h2db/db/logopicker</url>
-                    <defaultSchemaName></defaultSchemaName>
-                    <username>logopicker</username>
-                    <password></password>
-                    <referenceUrl>hibernate:spring:pro.tremblay.logopicker.domain?dialect=org.hibernate.dialect.H2Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+                    <!--<driver>org.h2.Driver</driver>-->
+                    <!--<url>jdbc:h2:file:./target/h2db/db/logopicker</url>-->
+                    <!--<defaultSchemaName></defaultSchemaName>-->
+                    <!--<username>logopicker</username>-->
+                    <!--<password></password>-->
+                    <!--<referenceUrl>hibernate:spring:pro.tremblay.logopicker.domain?dialect=org.hibernate.dialect.H2Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>-->
                     <verbose>true</verbose>
                     <logging>debug</logging>
                 </configuration>
@@ -738,6 +738,12 @@
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-undertow</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>com.google.cloud.sql</groupId>
+                    <!-- If using MySQL 6.x driver, use mysql-socket-factory-connector-j-6 instead -->
+                    <artifactId>mysql-socket-factory</artifactId>
+                    <version>1.0.5</version>
                 </dependency>
             </dependencies>
             <build>

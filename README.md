@@ -136,9 +136,31 @@ https://github.com/GoogleCloudPlatform/getting-started-java/tree/master/hellowor
   * src/main/appengine/app.yaml
 * important de bien regler les variables d environnement et la taille du container app engine
 * port 8080 !!! ou sinon 502 Bad Gateway du Nninx de GAE
-
 Documentation pour app.yaml
 https://cloud.google.com/appengine/docs/flexible/java/configuring-your-app-with-app-yaml#resource-settings
+
+#### Connect to Google Cloud Sql
+https://cloud.google.com/appengine/docs/standard/java/cloud-sql/using-cloud-sql-mysq 
+
+https://cloud.google.com/community/tutorials/run-spring-petclinic-on-app-engine-cloudsql
+
+
+Il suffit d'utiliser en production une url un peu special :
+spring.datasource.url=jdbc:mysql://google/petclinic?cloudSqlInstance=INSTANCE_CONNECTION_NAME&socketFactory=com.google.cloud.sql.mysql.SocketFactory
+
+Attention à bien activer aussi l'accès au SQL Api :
+
+    [INFO] GCLOUD: Caused by: java.lang.RuntimeException: The Google Cloud SQL API is not enabled for project [crafty-run-196704]. Please use the Google Developers Console to enable it: https://console.cloud.google.com/apis/api/sqladmin/overview?project=PROJECT_ID
+
+Ne pas oublier de rajouter dans les dependances : 
+
+    <dependency>
+        <groupId>com.google.cloud.sql</groupId>
+        <!-- If using MySQL 6.x driver, use mysql-socket-factory-connector-j-6 instead -->
+        <artifactId>mysql-socket-factory</artifactId>
+        <version>1.0.5</version>
+    </dependency>
+
 
 ### Amazon Beanstalk
 
