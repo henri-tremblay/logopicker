@@ -113,6 +113,33 @@ heroku ps:scale web=0
 
 ### Google Cloud Platform
 
+Google app engine from spring boot :
+
+    gcloud config set project my-project-id
+    gcloud components install app-engine-java
+
+2 approches : 
+
+#### War classique
+https://github.com/GoogleCloudPlatform/getting-started-java/tree/master/appengine-standard-java8/springboot-appengine-standard
+* necessite des adaptations par rapport a l app de base spring boot
+  * packaging war
+  * ajouter app engine plugin
+  * commenter et exclure des dependances / plugins
+  * src/main/webapp/WEB-INF/appengine-web.xml
+* probleme avec des services loaders, avec Ehcache et JSR 107 Caching Provider
+
+#### Jar executable qui lancera l application
+https://github.com/GoogleCloudPlatform/getting-started-java/tree/master/helloworld-springboot
+* necessite des adaptations par rapport a l app de base spring boot
+  * ajouter app engine plugin
+  * src/main/appengine/app.yaml
+* important de bien regler les variables d environnement et la taille du container app engine
+* port 8080 !!! ou sinon 502 Bad Gateway du Nninx de GAE
+
+Documentation pour app.yaml
+https://cloud.google.com/appengine/docs/flexible/java/configuring-your-app-with-app-yaml#resource-settings
+
 ### Amazon Beanstalk
 
 ### Microsoft Azure
