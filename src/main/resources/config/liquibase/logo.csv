@@ -5,4 +5,5 @@ id;cloud;name;url
 4;AWS;Amazon Web Services;/assets/aws/png
 5;AZURE;Microsoft Azure;/assets/azure.png
 6;CLOUD_FOUNDRY;Cloud Foundry;/assets/cloudfoundry.png
-7;UNKNOWN;Unknown;/assets/unknown.png
+7;GOOGLE;Google Cloud Platform;/assets/google.png
+8;UNKNOWN;Unknown;/assets/unknown.png
