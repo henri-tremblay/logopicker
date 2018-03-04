@@ -94,6 +94,9 @@ public class LogoService {
         if(environment.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_HEROKU)) {
             return CloudType.HEROKU;
         }
+        if(System.getenv("GAE_DEPLOYMENT_ID") != null) {
+            return CloudType.GOOGLE;
+        }
         if(environment.getProperty("spring.datasource.url").startsWith("jdbc:mysql://localhost:3306")) {
             return CloudType.LOCALHOST;
         }
