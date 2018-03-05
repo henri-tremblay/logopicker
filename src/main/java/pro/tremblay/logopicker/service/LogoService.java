@@ -94,6 +94,9 @@ public class LogoService {
         if(environment.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_HEROKU)) {
             return CloudType.HEROKU;
         }
+        if(environment.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_CLOUD)) {
+            return CloudType.CLOUD_FOUNDRY;
+        }
         if(System.getenv("GAE_DEPLOYMENT_ID") != null) {
             return CloudType.GOOGLE;
         }
