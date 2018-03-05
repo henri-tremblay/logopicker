@@ -94,11 +94,14 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 ng server --open
 ```
 
+We can use [pagereboot][http://pagereboot.com/pagereboot.php?url=http%3A%2F%2Flocalhost%3A4200&sec=5] to reboot the app.
+And [pagereboot][
+
 ### Local
 
 ```bash
 docker-compose -f src/main/docker/mysql.yml up -d
-mvn -Pprod
+./mvnw -Pprod
 ```
 
 ### Heroku
@@ -113,6 +116,57 @@ heroku ps:scale web=0
 ### Amazon Beanstalk
 
 ### Microsoft Azure
+
+https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-java-mysql
+
+Create the database
+
+```bash
+az group create --name logopicker --location "Canada East"
+az mysql server create --name logopicker --resource-group logopicker --location "Canada East" --admin-user some_user --admin-password some_password
+az mysql server firewall-rule create --name allIPs --server logopicker --resource-group logopicker --start-ip-address 0.0.0.0 --end-ip-address 255.255.255.255
+mysql -u some_password@logopicker -h logopicker.mysql.database.azure.com -P 3306 -p
+
+```
+
+```sql
+CREATE DATABASE logopicker;
+quit
+```
+
+Create the app
+
+```bash
+az appservice plan create --name logopicker --resource-group logopicker --sku FREE
+az webapp create --name logopicker --resource-group logopicker --plan logopicker
+az webapp config set --name logopicker --resource-group logopicker --java-version 1.8 --java-container Tomcat --java-container-version 9.0
+az webapp config appsettings set --settings SPRING_DATASOURCE_URL="jdbc:mysql://logopicker.mysql.database.azure.com:3306/logopicker?verifyServerCertificate=true&useSSL=true&requireSSL=false" --resource-group logopicker --name logopicker
+az webapp config appsettings set --settings SPRING_DATASOURCE_USERNAME=some_user@logopicker --resource-group logopicker --name logopicker
+az webapp config appsettings set --settings SPRING_DATASOURCE_PASSWORD=some_password --resource-group logopicker --name logopicker
+az webapp config appsettings set --settings SPRING_PROFILES_ACTIVE="prod,azure" --resource-group logopicker --name logopicker
+```
+
+Deploy the app
+
+```bash
+az webapp deployment list-publishing-profiles --name logopicker --resource-group logopicker --query "[?publishMethod=='FTP'].{URL:publishUrl, Username:userName,Password:userPWD}" --output json
+ftp waws-prod-yq1-003.ftp.azurewebsites.windows.net <<EOF
+logopicker\$logopicker
+the_password
+cd /site/wwwroot/webapps
+mdelete -i ROOT/*
+rmdir ROOT/
+put target/logopicker-0.0.1-SNAPSHOT.war ROOT.war
+quit
+EOF
+```
+
+See logs
+
+```bash
+az webapp browse --name logopicker --resource-group logopicker
+az webapp log tail --name logopicker --resource-group logopicker
+````
 
 ### Cloud Foundry
 
