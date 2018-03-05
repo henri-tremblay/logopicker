@@ -170,6 +170,17 @@ az webapp log tail --name logopicker --resource-group logopicker
 
 ### Cloud Foundry
 
+https://docs.spring.io/spring-boot/docs/current/reference/html/cloud-deployment.html
+https://pivotal.io/fr/platform/pcf-tutorials/getting-started-with-pivotal-cloud-foundry/deploy-the-sample-app
+
+http://www.jhipster.tech/cloudfoundry/
+
+
+
+In case you have more than 1sql in your pom :
+org.springframework.cloud.CloudException: No unique service matching interface javax.sql.DataSource found. Expected 1, found 2
+
+
 ### Troubleshooting
 
 * [JHipster Registry](https://henri-jhipster-registry.herokuapp.com)
