@@ -175,9 +175,12 @@ https://pivotal.io/fr/platform/pcf-tutorials/getting-started-with-pivotal-cloud-
 
 http://www.jhipster.tech/cloudfoundry/
 
-
-
-In case you have more than 1sql in your pom :
+    brew tap cloudfoundry/tap
+    brew install cf-cli 
+    
+    cf restage logopicker # redeploy app
+    
+In case you have more than 1 sql provider in your pom :
 org.springframework.cloud.CloudException: No unique service matching interface javax.sql.DataSource found. Expected 1, found 2
 
 
