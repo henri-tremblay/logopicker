@@ -40,13 +40,13 @@ import pro.tremblay.logopicker.domain.enumeration.CloudType;
 @SpringBootTest(classes = LogopickerApp.class)
 public class LogoResourceIntTest {
 
-    private static final String DEFAULT_NAME = "Heroku";
+    private static final String DEFAULT_NAME = "Unknown";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final CloudType DEFAULT_CLOUD = CloudType.HEROKU;
+    private static final CloudType DEFAULT_CLOUD = CloudType.UNKNOWN;
     private static final CloudType UPDATED_CLOUD = CloudType.LOCALHOST;
 
-    private static final String DEFAULT_URL = "https://cdn-images-1.medium.com/max/1600/1*9wOLuKSjCIAqSX_K8O0PKQ.png";
+    private static final String DEFAULT_URL = "/assets/unknown.png";
     private static final String UPDATED_URL = "BBBBBBBBBB";
 
     @Autowired
