@@ -108,6 +108,25 @@ docker-compose -f src/main/docker/mysql.yml up -d
 
 ```bash
 ./deploy_heroku.sh
+```
+
+### Heroku docker
+
+```bash
+./mvnw verify -Pprod dockerfile:build
+heroku container:login
+docker tag logopicker:latest registry.heroku.com/logopicker/web
+docker push registry.heroku.com/logopicker/web
+```
+
+To switch between the two stacks:
+```bash
+heroku stack:set heroku-16
+```
+
+Scale down:
+
+```bash
 heroku ps:scale web=0
 ```
 
@@ -198,6 +217,12 @@ See logs
 az webapp browse --name logopicker --resource-group logopicker
 az webapp log tail --name logopicker --resource-group logopicker
 ````
+
+### Microsoft Azure with Docker
+
+```bash
+az acr create --admin-enabled --name logopicker --resource-group logopicker --sku Basic
+```
 
 ### Cloud Foundry
 
