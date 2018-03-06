@@ -146,7 +146,38 @@ az webapp config appsettings set --settings SPRING_DATASOURCE_PASSWORD=some_pass
 az webapp config appsettings set --settings SPRING_PROFILES_ACTIVE="prod,azure" --resource-group logopicker --name logopicker
 ```
 
+Create a Docker registry
+
+```bash
+az acr create --admin-enabled --name logopicker --resource-group logopicker --sku Basic
+export DOCKER_REGISTRY=$(az acr show --name logopicker --query loginServer --output tsv)
+export DOCKER_USER=logopicker
+export DOCKER_PASSWORD=$(az acr credential show --name logopicker --query passwords[0].value --output tsv)
+ ```
+ 
+Deploy to registry
+
+```bash
+docker tag logopicker $DOCKER_REGISTRY/logopicker
+docker login $DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASSWORD
+docker push $DOCKER_REGISTRY/logopicker
+az acr repository list --name logopicker # see it deployed
+```
+
 Deploy the app
+
+```bash
+az webapp config container set --name logopicker --resource-group logopicker \
+    --docker-custom-image-name ${DOCKER_REGISTRY}/logopicker:latest \
+    --docker-registry-server-url https://${DOCKER_REGISTRY} \
+    --docker-registry-server-password ${DOCKER_PASSWORD} \
+    --docker-registry-server-user ${DOCKER_USER}
+az webapp config appsettings set --settings PORT=8080 --name logopicker --resource-group logopicker
+az webapp restart --name logopicker --resource-group logopicker
+az webapp show --name logopicker --resource-group logopicker --query hostNames[0] --out tsv
+```
+
+
 
 ```bash
 az webapp deployment list-publishing-profiles --name logopicker --resource-group logopicker --query "[?publishMethod=='FTP'].{URL:publishUrl, Username:userName,Password:userPWD}" --output json
