@@ -288,6 +288,26 @@ http://www.jhipster.tech/cloudfoundry/
 In case you have more than 1 sql provider in your pom :
 org.springframework.cloud.CloudException: No unique service matching interface javax.sql.DataSource found. Expected 1, found 2
 
+### AWS Beanstalk
+
+Configure
+
+```bash
+eb init
+```
+
+Run local
+
+```bash
+eb local run
+```
+
+Deploy
+
+```bash
+eb create -s
+```
+
 ### Kubernetes
 
 #### Preparation

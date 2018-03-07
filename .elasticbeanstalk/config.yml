@@ -1,12 +1,13 @@
 branch-defaults:
   master:
     environment: null
-    group_suffix: null
+deploy:
+  artifact: Dockerrun.aws.json
 global:
   application_name: logopicker
   branch: null
   default_ec2_keyname: henri
-  default_platform: Java 8
+  default_platform: Docker 17.09.1-ce
   default_region: us-east-1
   include_git_submodules: true
   instance_profile: null
@@ -16,6 +17,3 @@ global:
   repository: null
   sc: git
   workspace_type: Application
-
-deploy:
-  artifact: target/logopicker-0.0.1-SNAPSHOT.war
