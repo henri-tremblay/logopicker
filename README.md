@@ -314,6 +314,12 @@ Deploy
 eb create -s
 ```
 
+Terminate
+
+```bash
+eb terminate --all
+```
+
 ### Kubernetes
 
 #### Preparation
