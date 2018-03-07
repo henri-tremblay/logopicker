@@ -41,5 +41,8 @@ resources:
 
 env_variables:
   SPRING_PROFILES_ACTIVE: 'gae,prod'
+  SPRING_DATASOURCE_URL: 'jdbc:mysql://google/logopicker?cloudSqlInstance=crafty-run-196704:northamerica-northeast1:logopicker-db&socketFactory=com.google.cloud.sql.mysql.SocketFactory'
+  SPRING_DATASOURCE_USERNAME: 'root'
+  SPRING_DATASOURCE_PASSWORD: 'logopicker'
   JHIPSTER_REGISTRY_PASSWORD: 'admin'
   SERVER_PORT: '8080'
