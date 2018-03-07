@@ -186,6 +186,7 @@ Ne pas oublier de rajouter dans les dependances :
 ### Microsoft Azure
 
 https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-java-mysql
+https://docs.microsoft.com/en-us/java/azure/spring-framework/deploy-containerized-spring-boot-java-app-with-maven-plugin
 
 Create the database
 
@@ -271,7 +272,12 @@ az webapp log tail --name logopicker --resource-group logopicker
 
 ```bash
 az acr create --admin-enabled --name logopicker --resource-group logopicker --sku Basic
+mvn azure-webapp:deploy
 ```
+
+### Microsoft Azure executable Jar
+
+https://blogs.msdn.microsoft.com/azureossds/2015/12/28/running-java-jar-file-to-serve-web-requests-on-azure-app-service-web-apps/
 
 ### Cloud Foundry
 
