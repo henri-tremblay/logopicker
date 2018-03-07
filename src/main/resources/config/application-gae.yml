@@ -4,3 +4,5 @@ eureka:
         hostname: ${GOOGLE_CLOUD_PROJECT}.appspot.com
         nonSecurePort: 80
         secure-port: 443
+        metadata-map:
+            zone: gae
