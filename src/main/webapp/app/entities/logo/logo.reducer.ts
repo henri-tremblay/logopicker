@@ -9,6 +9,7 @@ import { ILogo, defaultValue } from 'app/shared/model/logo.model';
 export const ACTION_TYPES = {
   FETCH_LOGO_LIST: 'logo/FETCH_LOGO_LIST',
   FETCH_LOGO: 'logo/FETCH_LOGO',
+  FETCH_CURRENT_LOGO: 'logo/FETCH_CURRENT_LOGO',
   CREATE_LOGO: 'logo/CREATE_LOGO',
   UPDATE_LOGO: 'logo/UPDATE_LOGO',
   DELETE_LOGO: 'logo/DELETE_LOGO',
@@ -32,6 +33,7 @@ export default (state: LogoState = initialState, action): LogoState => {
   switch (action.type) {
     case REQUEST(ACTION_TYPES.FETCH_LOGO_LIST):
     case REQUEST(ACTION_TYPES.FETCH_LOGO):
+    case REQUEST(ACTION_TYPES.FETCH_CURRENT_LOGO):
       return {
         ...state,
         errorMessage: null,
@@ -49,6 +51,7 @@ export default (state: LogoState = initialState, action): LogoState => {
       };
     case FAILURE(ACTION_TYPES.FETCH_LOGO_LIST):
     case FAILURE(ACTION_TYPES.FETCH_LOGO):
+    case FAILURE(ACTION_TYPES.FETCH_CURRENT_LOGO):
     case FAILURE(ACTION_TYPES.CREATE_LOGO):
     case FAILURE(ACTION_TYPES.UPDATE_LOGO):
     case FAILURE(ACTION_TYPES.DELETE_LOGO):
@@ -66,6 +69,7 @@ export default (state: LogoState = initialState, action): LogoState => {
         entities: action.payload.data
       };
     case SUCCESS(ACTION_TYPES.FETCH_LOGO):
+    case SUCCESS(ACTION_TYPES.FETCH_CURRENT_LOGO):
       return {
         ...state,
         loading: false,
@@ -108,6 +112,14 @@ export const getEntity: ICrudGetAction<ILogo> = id => {
   const requestUrl = `${apiUrl}/${id}`;
   return {
     type: ACTION_TYPES.FETCH_LOGO,
+    payload: axios.get<ILogo>(requestUrl)
+  };
+};
+
+export const getCurrentLogo: ICrudGetAction<ILogo> = () => {
+  const requestUrl = `${apiUrl}/current`;
+  return {
+    type: ACTION_TYPES.FETCH_CURRENT_LOGO,
     payload: axios.get<ILogo>(requestUrl)
   };
 };
