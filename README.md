@@ -1,4 +1,10 @@
 # logopicker
+
+This is a little application showing how to deploy on different clouds.
+It requires a MySQL database and nothing else.
+
+When launching the homepage, you should see the logo of the cloud where it was deployed.
+
 This application was generated using JHipster 5.1.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.1.0](https://www.jhipster.tech/documentation-archive/v5.1.0).
 
 ## Development
@@ -122,6 +128,33 @@ For more information refer to [Using Docker and Docker-Compose][], this page als
 
 To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
 
+## Deployment
+
+### Heroku
+
+#### Installation
+
+1. Install the heroku command line client: `brew install heroku`
+2. Install the deploy plugin: `heroku plugins:install heroku-cli-deploy`
+3. Create the app on heroku: `heroku create logopicker`
+4. Add a Procfile (`Procfile`)
+5. Configure the datasource for Heroku (`src/main/resources/config/application-heroku.yml`)
+
+#### Deployment
+
+1. Build for production `./mvnw clean verify -Pprod -DskipTests`
+2. Deploy to heroku: `heroku deploy:jar --jar target/*.war`
+
+#### Useful commands
+
+* See the environment variables: `heroku config`
+* See the logs: `heroku logs`
+* To connect to the server: `heroku ps:exec`
+* To install java debugging tools: `heroku plugins:install heroku-cli-java`
+* To scale to more dynos: `heroku ps:scale web=2`
+
+## Useful links
+
 [JHipster Homepage and latest documentation]: https://www.jhipster.tech
 [JHipster 5.1.0 archive]: https://www.jhipster.tech/documentation-archive/v5.1.0
 
@@ -130,7 +163,6 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Using JHipster in production]: https://www.jhipster.tech/documentation-archive/v5.1.0/production/
 [Running tests page]: https://www.jhipster.tech/documentation-archive/v5.1.0/running-tests/
 [Setting up Continuous Integration]: https://www.jhipster.tech/documentation-archive/v5.1.0/setting-up-ci/
-
 
 [Node.js]: https://nodejs.org/
 [Yarn]: https://yarnpkg.org/
