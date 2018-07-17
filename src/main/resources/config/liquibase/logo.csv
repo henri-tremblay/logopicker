@@ -1,0 +1,9 @@
+id;cloud;name;url
+1;UNKNOWN;Unknown;unknown.png
+2;LOCALHOST;Localhost;localhost.jpg
+3;AWS;Amazon Web Services;aws.png
+4;AZURE;Microsoft Azure;azure.png
+5;CLOUD_FOUNDRY;Cloud Foundry;cloudfoundry.png
+6;GOOGLE;Google Cloud Platform;google.png
+7;HEROKU;Heroku;heroku.png
+8;ORACLE;Oracle Cloud;oracle.png
