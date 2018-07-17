@@ -1,13 +1,17 @@
 package pro.tremblay.logopicker.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+
+import io.github.jhipster.config.JHipsterConstants;
 import pro.tremblay.logopicker.domain.Logo;
+import pro.tremblay.logopicker.domain.enumeration.Cloud;
 import pro.tremblay.logopicker.repository.LogoRepository;
 import pro.tremblay.logopicker.web.rest.errors.BadRequestAlertException;
 import pro.tremblay.logopicker.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +34,11 @@ public class LogoResource {
 
     private final LogoRepository logoRepository;
 
-    public LogoResource(LogoRepository logoRepository) {
+    private final Environment environment;
+
+    public LogoResource(LogoRepository logoRepository, Environment environment) {
         this.logoRepository = logoRepository;
+        this.environment = environment;
     }
 
     /**
@@ -115,5 +122,41 @@ public class LogoResource {
 
         logoRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /logos/current : get the current logo.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the logo, or with status 404 (Not Found)
+     */
+    @GetMapping("/logos/current")
+    @Timed
+    public ResponseEntity<Logo> getCurrentLogo() {
+        log.debug("REST request to get current Logo");
+        Cloud type = deduceCloud();
+        Logo logo = logoRepository.findByCloud(type);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(logo));
+    }
+
+    /**
+     * Deduce the cloud type from the environment
+     *
+     * @return cloud type
+     */
+    public Cloud deduceCloud() {
+        if(environment.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_HEROKU)) {
+            return Cloud.HEROKU;
+        }
+        if(environment.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_CLOUD)) {
+            return Cloud.CLOUD_FOUNDRY;
+        }
+        if(System.getenv("GAE_DEPLOYMENT_ID") != null) {
+            return Cloud.GOOGLE;
+        }
+        if(environment.getProperty("spring.datasource.url").startsWith("jdbc:mysql://localhost:3306")) {
+            return Cloud.LOCALHOST;
+        }
+
+        return Cloud.UNKNOWN;
     }
 }

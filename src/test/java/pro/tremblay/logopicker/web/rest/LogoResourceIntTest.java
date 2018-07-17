@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.env.Environment;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -43,10 +44,10 @@ public class LogoResourceIntTest {
     private static final Cloud DEFAULT_CLOUD = Cloud.UNKNOWN;
     private static final Cloud UPDATED_CLOUD = Cloud.LOCALHOST;
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String DEFAULT_NAME = "Unknown";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_URL = "AAAAAAAAAA";
+    private static final String DEFAULT_URL = "unknown.png";
     private static final String UPDATED_URL = "BBBBBBBBBB";
 
     @Autowired
@@ -65,6 +66,9 @@ public class LogoResourceIntTest {
     @Autowired
     private EntityManager em;
 
+    @Autowired
+    private Environment environment;
+
     private MockMvc restLogoMockMvc;
 
     private Logo logo;
@@ -72,7 +76,7 @@ public class LogoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final LogoResource logoResource = new LogoResource(logoRepository);
+        final LogoResource logoResource = new LogoResource(logoRepository, environment);
         this.restLogoMockMvc = MockMvcBuilders.standaloneSetup(logoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -153,7 +157,7 @@ public class LogoResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())));
     }
-    
+
 
     @Test
     @Transactional
@@ -258,5 +262,17 @@ public class LogoResourceIntTest {
         assertThat(logo1).isNotEqualTo(logo2);
         logo1.setId(null);
         assertThat(logo1).isNotEqualTo(logo2);
+    }
+
+    @Test
+    @Transactional
+    public void getCurrentLogo() throws Exception {
+        // Get the logo
+        restLogoMockMvc.perform(get("/api/logos/current"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.cloud").value(DEFAULT_CLOUD.toString()))
+            .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()));
     }
 }
