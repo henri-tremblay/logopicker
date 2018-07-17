@@ -1,2 +1,0 @@
-FROM henritremblay/logopicker
-EXPOSE 8080

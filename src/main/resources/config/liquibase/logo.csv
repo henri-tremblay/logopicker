@@ -1,9 +1,0 @@
-id;cloud;name;url
-1;LOCALHOST;Localhost;/assets/localhost.jpg
-2;HEROKU;Heroku;/assets/heroku.png
-3;ORACLE;Oracle Cloud;/assets/oracle.png
-4;AWS;Amazon Web Services;/assets/aws/png
-5;AZURE;Microsoft Azure;/assets/azure.png
-6;CLOUD_FOUNDRY;Cloud Foundry;/assets/cloudfoundry.png
-7;GOOGLE;Google Cloud Platform;/assets/google.png
-8;UNKNOWN;Unknown;/assets/unknown.png

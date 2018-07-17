@@ -3,34 +3,30 @@
     "promptValues": {
       "packageName": "pro.tremblay.logopicker"
     },
-    "jhipsterVersion": "4.14.0",
+    "jhipsterVersion": "5.1.0",
+    "applicationType": "monolith",
     "baseName": "logopicker",
     "packageName": "pro.tremblay.logopicker",
     "packageFolder": "pro/tremblay/logopicker",
     "serverPort": "8080",
     "authenticationType": "jwt",
     "cacheProvider": "ehcache",
-    "enableHibernateCache": true,
+    "enableHibernateCache": false,
     "websocket": false,
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
     "prodDatabaseType": "mysql",
     "searchEngine": false,
     "messageBroker": false,
-    "serviceDiscoveryType": "eureka",
+    "serviceDiscoveryType": false,
     "buildTool": "maven",
-    "enableSocialSignIn": false,
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "47b13339d4dc12ee90711b2264ff8d7cb0be9758",
-    "enableTranslation": false,
-    "applicationType": "microservice",
-    "testFrameworks": [
-      "gatling"
-    ],
-    "jhiPrefix": "jhi",
+    "jwtSecretKey": "bc5723a6c065ccd22c630d5a7afd3120ef4dfe50",
+    "clientFramework": "react",
+    "useSass": false,
     "clientPackageManager": "yarn",
-    "skipClient": true,
-    "skipUserManagement": true,
-    "herokuDeployType": "jar"
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "enableTranslation": false
   }
 }

@@ -11,13 +11,15 @@ public final class HeaderUtil {
 
     private static final Logger log = LoggerFactory.getLogger(HeaderUtil.class);
 
+    private static final String APPLICATION_NAME = "logopickerApp";
+
     private HeaderUtil() {
     }
 
     public static HttpHeaders createAlert(String message, String param) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-logopickerApp-alert", message);
-        headers.add("X-logopickerApp-params", param);
+        headers.add("X-" + APPLICATION_NAME + "-alert", message);
+        headers.add("X-" + APPLICATION_NAME + "-params", param);
         return headers;
     }
 
@@ -36,8 +38,8 @@ public final class HeaderUtil {
     public static HttpHeaders createFailureAlert(String entityName, String errorKey, String defaultMessage) {
         log.error("Entity processing failed, {}", defaultMessage);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-logopickerApp-error", defaultMessage);
-        headers.add("X-logopickerApp-params", entityName);
+        headers.add("X-" + APPLICATION_NAME + "-error", defaultMessage);
+        headers.add("X-" + APPLICATION_NAME + "-params", entityName);
         return headers;
     }
 }
