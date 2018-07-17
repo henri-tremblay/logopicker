@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "cloud",
+            "fieldType": "Cloud",
+            "fieldValues": "UNKNOWN,LOCALHOST,HEROKU,ORACLE,AWS,AZURE,CLOUD_FOUNDRY,GOOGLE"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "url",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180717171533",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "logo",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}
