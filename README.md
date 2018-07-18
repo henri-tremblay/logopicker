@@ -132,18 +132,36 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 
 ### Heroku
 
-#### Installation
+#### For all
+
+##### Installation
 
 1. Install the heroku command line client: `brew install heroku`
-2. Install the deploy plugin: `heroku plugins:install heroku-cli-deploy`
-3. Create the app on heroku: `heroku create logopicker`
-4. Add a Procfile (`Procfile`)
-5. Configure the datasource for Heroku (`src/main/resources/config/application-heroku.yml`)
+2. Create the app on heroku: `heroku create logopicker` (and provision your favorite db)
+3. Configure the datasource for Heroku (`src/main/resources/config/application-heroku.yml`)
 
-#### Deployment
+#### Old school
+
+##### Installation
+
+1. Install the deploy plugin: `heroku plugins:install heroku-cli-deploy`
+2. Add a Procfile (`Procfile`)
+
+##### Deployment
 
 1. Build for production `./mvnw clean verify -Pprod -DskipTests`
 2. Deploy to heroku: `heroku deploy:jar --jar target/*.war`
+
+#### Docker
+
+##### Installation
+
+##### Deployment
+
+1. Construct the docker image: `./mvnw verify -Pprod dockerfile:build`
+2. Tag it for the heroku registry: `docker tag logopicker:latest registry.heroku.com/logopicker/web`
+3. Push it there: `docker push registry.heroku.com/logopicker/web`
+4. Release it to production: `heroku container:release web`
 
 #### Useful commands
 
@@ -152,6 +170,7 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 * To connect to the server: `heroku ps:exec`
 * To install java debugging tools: `heroku plugins:install heroku-cli-java`
 * To scale to more dynos: `heroku ps:scale web=2`
+* To open your app in a browser: `heroku open`
 
 ## Useful links
 
