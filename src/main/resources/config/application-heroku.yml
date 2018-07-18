@@ -18,3 +18,7 @@ spring:
         password: ${JDBC_DATABASE_PASSWORD}
         hikari:
             maximumPoolSize: 8
+
+# Needed only for Docker deployment
+server:
+    port: ${PORT}

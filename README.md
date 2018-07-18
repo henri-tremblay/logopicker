@@ -156,6 +156,9 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 
 ##### Installation
 
+1. Set Heroku environment variables: `heroku config:set JDBC_DATABASE_USERNAME=user JDBC_DATABASE_PASSWORD=password JDBC_DATABASE_URL=jdbc:mysql://blablabla.rds.amazonaws.com:3306/xxx?useSSL=false SPRING_PROFILES_ACTIVE: prod,heroku`
+2. The dockerfile needs to be heroku compliant (CMD mandatory)
+
 ##### Deployment
 
 1. Construct the docker image: `./mvnw verify -Pprod dockerfile:build`
@@ -171,6 +174,16 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 * To install java debugging tools: `heroku plugins:install heroku-cli-java`
 * To scale to more dynos: `heroku ps:scale web=2`
 * To open your app in a browser: `heroku open`
+
+### Oracle
+
+### Azure
+
+### AWS
+
+### CloudFoundry
+
+### Google Cloud Platform
 
 ## Useful links
 

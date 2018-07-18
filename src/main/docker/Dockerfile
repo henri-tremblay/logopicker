@@ -8,13 +8,15 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 RUN adduser -D -s /bin/sh jhipster
 WORKDIR /home/jhipster
 
+ENTRYPOINT ["./entrypoint.sh"]
+
+# To work on Heroku
+CMD ""
+
+EXPOSE 8080
+
 ADD entrypoint.sh entrypoint.sh
 RUN chmod 755 entrypoint.sh && chown jhipster:jhipster entrypoint.sh
 USER jhipster
 
 ADD *.war app.war
-
-ENTRYPOINT ["./entrypoint.sh"]
-
-EXPOSE 8080
-
