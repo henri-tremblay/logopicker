@@ -130,6 +130,18 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 
 ## Deployment
 
+### Local
+
+#### Old school
+
+1. Launch the mysql DB with docker: `docker-compose -f src/main/docker/mysql.yml up -d`
+2. Launch the app: `./mvnw -Pprod`
+
+#### Docker
+
+1. Create the docker image: `./mvnw verify -Pprod dockerfile:build -DskipTests`
+2. Launch the docker environment: `docker-compose -f src/main/docker/app.yml up -d`
+
 ### Heroku
 
 #### For all
@@ -139,6 +151,7 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 1. Install the heroku command line client: `brew install heroku`
 2. Create the app on heroku: `heroku create logopicker` (and provision your favorite db)
 3. Configure the datasource for Heroku (`src/main/resources/config/application-heroku.yml`)
+4. Set meaningful JVM options: `heroky config:set JAVA_OPTS=-Xmx256m`
 
 #### Old school
 
@@ -182,6 +195,10 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 ### AWS
 
 ### CloudFoundry
+
+#### For all
+
+1. Install the CloudFoundry command line client: `brew tap cloudfoundry/tap; brew install cf-cli` 
 
 ### Google Cloud Platform
 
