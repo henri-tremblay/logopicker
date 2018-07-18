@@ -142,6 +142,10 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 1. Create the docker image: `./mvnw verify -Pprod dockerfile:build -DskipTests`
 2. Launch the docker environment: `docker-compose -f src/main/docker/app.yml up -d`
 
+#### Kubernetes
+
+TBD
+
 ### Heroku
 
 #### For all
@@ -179,6 +183,10 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 3. Push it there: `docker push registry.heroku.com/logopicker/web`
 4. Release it to production: `heroku container:release web`
 
+#### Kubernetes
+
+Not available
+
 #### Useful commands
 
 * See the environment variables: `heroku config`
@@ -198,7 +206,28 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 
 #### For all
 
+##### Installation
+
 1. Install the CloudFoundry command line client: `brew tap cloudfoundry/tap; brew install cf-cli` 
+2. Login to pivotal: `cf login -a https://api.run.pivotal.io`
+
+#### Old school
+
+##### Installation
+
+1. Create the DB: `cf create-service cleardb spark logopicker-db`
+2. Create a `manifest.yml`
+
+##### Deployment
+
+1. Build for production `./mvnw clean verify -Pprod -DskipTests`
+2. Deploy: `cf push -p target/*.war`
+
+#### Useful commands
+
+* Recent logs: `cf logs logopicker --recent`
+* Tail logs: `cf logs logopicker`
+* See available plan for a marketplace product: `cf marketplace -s cleardb`
 
 ### Google Cloud Platform
 
@@ -227,53 +256,6 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 # Old Deployment that should be deleted or merged above
 
 ## Deployment
-
-### Configure
-
-* Set zone to whatever you want in `src/main/resources/config/application.yml`
-* Set the same zone in `frontend/src/app/app.service.ts`
-
-### Start frontend
-
-```bash
-ng server --open
-```
-
-We can use [pagereboot][http://pagereboot.com/pagereboot.php?url=http%3A%2F%2Flocalhost%3A4200&sec=5] to reboot the app.
-And [pagereboot][
-
-### Local
-
-```bash
-docker-compose -f src/main/docker/mysql.yml up -d
-./mvnw -Pprod
-```
-
-### Heroku
-
-```bash
-./deploy_heroku.sh
-```
-
-### Heroku docker
-
-```bash
-./mvnw verify -Pprod dockerfile:build
-heroku container:login
-docker tag logopicker:latest registry.heroku.com/logopicker/web
-docker push registry.heroku.com/logopicker/web
-```
-
-To switch between the two stacks:
-```bash
-heroku stack:set heroku-16
-```
-
-Scale down:
-
-```bash
-heroku ps:scale web=0
-```
 
 ### Google Cloud Platform
 
