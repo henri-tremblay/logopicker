@@ -217,6 +217,19 @@ Not available
 
 1. Create the DB: `cf create-service cleardb spark logopicker-db`
 2. Create a `manifest.yml`
+3. Add link to the eureka server: `src/main/resources/config/application-cloudfoundry.yml`
+4. Add maven dependencies for cloud connection
+
+```xml
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-localconfig-connector</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-cloudfoundry-connector</artifactId>
+        </dependency>
+```
 
 ##### Deployment
 
