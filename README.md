@@ -210,15 +210,9 @@ Not available
 
 1. Install the CloudFoundry command line client: `brew tap cloudfoundry/tap; brew install cf-cli` 
 2. Login to pivotal: `cf login -a https://api.run.pivotal.io`
-
-#### Old school
-
-##### Installation
-
-1. Create the DB: `cf create-service cleardb spark logopicker-db`
-2. Create a `manifest.yml`
-3. Add link to the eureka server: `src/main/resources/config/application-cloudfoundry.yml`
-4. Add maven dependencies for cloud connection
+3. Create the DB: `cf create-service cleardb spark logopicker-db`
+4. Add link to the eureka server: `src/main/resources/config/application-cloudfoundry.yml`
+5. Add maven dependencies for cloud connection
 
 ```xml
         <dependency>
@@ -231,16 +225,35 @@ Not available
         </dependency>
 ```
 
+#### Old school
+
+##### Installation
+
+1. Create a `manifest.yml`
+
 ##### Deployment
 
 1. Build for production `./mvnw clean verify -Pprod -DskipTests`
 2. Deploy: `cf push -p target/*.war`
+
+#### Docker
+
+##### Installation
+
+1. Enable docker: `cf enable-feature-flag diego_docker`
+
+##### Deployment
+
+1. Build for production `./mvnw clean verify -Pprod -DskipTests`
+2. Deploy: `cf push --docker-image -p target/*.war`
 
 #### Useful commands
 
 * Recent logs: `cf logs logopicker --recent`
 * Tail logs: `cf logs logopicker`
 * See available plan for a marketplace product: `cf marketplace -s cleardb`
+* Know the existing users: `cf org-users tremblay.pro`
+* Know the users per spaces: `cf space-users tremblay.pro development`
 
 ### Google Cloud Platform
 
