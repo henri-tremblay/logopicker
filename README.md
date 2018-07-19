@@ -257,6 +257,37 @@ Not available
 
 ### Google Cloud Platform
 
+TDB
+
+### Troubleshooting
+
+#### Query the server
+
+```bash
+SERVER="https://localhost:8080"
+curl -v -sb -H "Content-Type: application/json" -H "${token%?}" $SERVER//api/logos/current
+```
+
+#### Database cleanup
+
+```bash
+docker exec -ti docker_logopicker-mysql_1 mysql
+```
+
+```sql
+use logopicker
+drop table logo;
+drop table jhi_persistent_audit_evt_data;
+drop table jhi_persistent_audit_event;
+drop table databasechangelog;
+drop table databasechangeloglock;
+show tables;
+```
+
+#### See environment
+
+[http://localhost:8080/management/env](http://localhost:8080/management/env)
+
 ## Useful links
 
 [JHipster Homepage and latest documentation]: https://www.jhipster.tech
@@ -332,9 +363,6 @@ Ne pas oublier de rajouter dans les dependances :
         <artifactId>mysql-socket-factory</artifactId>
         <version>1.0.5</version>
     </dependency>
-
-
-### Amazon Beanstalk
 
 ### Microsoft Azure
 
@@ -432,21 +460,6 @@ mvn azure-webapp:deploy
 
 https://blogs.msdn.microsoft.com/azureossds/2015/12/28/running-java-jar-file-to-serve-web-requests-on-azure-app-service-web-apps/
 
-### Cloud Foundry
-
-https://docs.spring.io/spring-boot/docs/current/reference/html/cloud-deployment.html
-https://pivotal.io/fr/platform/pcf-tutorials/getting-started-with-pivotal-cloud-foundry/deploy-the-sample-app
-
-http://www.jhipster.tech/cloudfoundry/
-
-    brew tap cloudfoundry/tap
-    brew install cf-cli 
-    
-    cf restage logopicker # redeploy app
-    
-In case you have more than 1 sql provider in your pom :
-org.springframework.cloud.CloudException: No unique service matching interface javax.sql.DataSource found. Expected 1, found 2
-
 ### AWS Beanstalk
 
 Configure
@@ -541,32 +554,3 @@ The default setting are optimized for middle scale clusters. You are free to inc
 
 Sometimes the database changelog lock gets corrupted. You will need to connect to the database using `kubectl exec -it` and remove all lines of liquibases `databasechangeloglock` table.
 
-
-### Troubleshooting
-
-* [JHipster Registry](https://henri-jhipster-registry.herokuapp.com)
-
-```bash
-# could be admin:admin@ is authentication was there
-curl -H 'Content-Type: application/json' -H "Accept: application/json" https://henri-jhipster-registry.herokuapp.com/api/eureka/applications
-curl -H 'Content-Type: application/json' -H "Accept: application/json" https://henri-jhipster-registry.herokuapp.com/eureka/apps/LOGOPICKER
-curl http://localhost:8080/api/logos/current
-```
-
-Database cleanup:
-
-```bash
-docker exec -ti docker_logopicker-mysql_1 mysql
-```
-
-```sql
-use logopicker
-drop table logo;
-drop table jhi_persistent_audit_evt_data;
-drop table jhi_persistent_audit_event;
-drop table databasechangelog;
-drop table databasechangeloglock;
-show tables;
-```
-
-Env: [http://localhost:8080/management/env](http://localhost:8080/management/env)
