@@ -68,8 +68,6 @@ Note: there are still few other things remaining to do for Leaflet that we won't
 
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
 
-
-
 ## Building for production
 
 To optimize the logopicker application for production, run:
@@ -96,8 +94,6 @@ To launch your application's tests, run:
 Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
 
     yarn test
-
-
 
 For more information, refer to the [Running tests page][].
 
@@ -129,6 +125,10 @@ For more information refer to [Using Docker and Docker-Compose][], this page als
 To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
 
 ## Deployment
+
+We assume that you already have an account on the different clouds. 
+So the setup starts when you need to install a local client.
+We have used a commmand line client as much as possible to perform the deployment.
 
 ### Local
 
@@ -185,7 +185,7 @@ TBD
 
 #### Kubernetes
 
-Not available
+N/A
 
 #### Useful commands
 
@@ -198,9 +198,76 @@ Not available
 
 ### Oracle
 
+#### For all
+
+TDB
+
+#### Old school
+
+TDB
+
+#### Docker
+
+TDB
+
+#### Kubernetes
+
+N/A
+
 ### Azure
 
-### AWS
+#### For all
+
+##### Installation
+
+1. Install the azure client: `brew install azure-cli`
+2. Login: `az login`
+
+#### Old school
+
+TDB
+
+#### Docker
+
+TDB
+
+#### Kubernetes
+
+TDB
+
+### AWS BeanStalk
+
+#### For all
+
+##### Installation
+
+We assume here that you already have an AWS account.
+
+1. Install the BeanStalk client: `brew install aws-elasticbeanstalk`
+
+#### Old school
+
+1. Configure the deployment (`.elasticbeanstalk/config.yml`): `eb init`
+2. Create an instance (without load balancing): `eb create -s`
+3. Set Spring profile: `eb setenv SPRING_PROFILES_ACTIVE=prod,aws`
+
+SPRING_DATASOURCE_URL=
+SPRING_DATASOURCE_USERNAME=
+SPRING_DATASOURCE_PASSWORD=
+
+#### Useful commands
+
+* Open the BeanStalk console in a browser: `eb console`
+* Terminate the environment: `eb terminate environment logopicker-dev`
+* Run a docker deployment locally: `eb local run`
+
+#### Docker
+
+TDB
+
+#### Kubernetes
+
+TDB
 
 ### CloudFoundry
 
@@ -247,6 +314,10 @@ Not available
 1. Build for production `./mvnw clean verify -Pprod -DskipTests`
 2. Deploy: `cf push --docker-image -p target/*.war`
 
+#### Kubernetes
+
+TDB
+
 #### Useful commands
 
 * Recent logs: `cf logs logopicker --recent`
@@ -256,6 +327,26 @@ Not available
 * Know the users per spaces: `cf space-users tremblay.pro development`
 
 ### Google Cloud Platform
+
+#### For all
+
+##### Installation
+
+TDB
+
+#### Old school
+
+TDB
+
+#### Docker
+
+TDB
+
+#### Kubernetes
+
+TDB
+
+#### Useful commands
 
 TDB
 
