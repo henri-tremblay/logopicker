@@ -247,19 +247,28 @@ We assume here that you already have an AWS account.
 
 #### Old school
 
+##### Installation
+
 1. Configure the deployment (`.elasticbeanstalk/config.yml`): `eb init`
 2. Create an instance (without load balancing): `eb create -s`
-3. Set Spring profile: `eb setenv SPRING_PROFILES_ACTIVE=prod,aws`
-
-SPRING_DATASOURCE_URL=
-SPRING_DATASOURCE_USERNAME=
-SPRING_DATASOURCE_PASSWORD=
-
+3. Add options including database options (`.ebextensions/options.config`)
+4. Configure the database URL (`src/main/resources/config/application-aws.yml`)
+5. Add a `Procfile` (`.elasticbeanstalk/Procfile`)
+6. Use the Maven assembly plugin to create a nice zip that will be sent to your server (`src/main/assembly/zip.xml`)
+ 
+ ##### Deployment
+ 
+ 1. `eb deploy`
+ 
+ Note: The theory is that the database should be created using the configuration. It never worked for me.
+ 
 #### Useful commands
 
 * Open the BeanStalk console in a browser: `eb console`
 * Terminate the environment: `eb terminate environment logopicker-dev`
 * Run a docker deployment locally: `eb local run`
+* Connect to the server: `eb ssh`
+* See the logs: `eb logs`
 
 #### Docker
 

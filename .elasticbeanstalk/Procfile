@@ -1,0 +1,1 @@
+web: java -Xmx256m -jar logopicker-0.0.1-SNAPSHOT.war --spring.profiles.active=prod,aws
