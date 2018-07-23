@@ -40,6 +40,6 @@ resources:
 
 
 env_variables:
-  SPRING_PROFILES_ACTIVE: 'gae,prod'
+  SPRING_PROFILES_ACTIVE: 'prod,gcp'
   JHIPSTER_REGISTRY_PASSWORD: 'admin'
   SERVER_PORT: '8080'

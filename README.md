@@ -257,8 +257,47 @@ Not available
 
 ### Google Cloud Platform
 
-TDB
+Google app engine from spring boot :
 
+    gcloud config set project my-project-id
+    gcloud components install app-engine-java
+
+2 approaches : 
+
+#### "classic" War packaging with  Google provided Jetty sevlet container
+https://github.com/GoogleCloudPlatform/getting-started-java/tree/master/appengine-standard-java8/springboot-appengine-standard
+* necessite des adaptations par rapport a l app de base spring boot
+  * packaging war
+  * ajouter app engine plugin
+  * commenter et exclure des dependances / plugins
+  * src/main/webapp/WEB-INF/appengine-web.xml
+* probleme avec des services loaders, avec Ehcache et JSR 107 Caching Provider
+
+#### Preferred : executable jar (embedding its own servlet container )
+https://github.com/GoogleCloudPlatform/getting-started-java/tree/master/helloworld-springboot
+https://cloud.google.com/community/tutorials/run-spring-petclinic-on-app-engine-cloudsql
+
+* further configure your service in Google Cloud Platform
+
+       gcloud app create
+       gcloud auth application-default login
+
+* Create the database
+      
+       gcloud beta sql databases create logopicker --instance=logopicker-db
+
+* Add the plugin definition (appengine-maven-plugin) and the Google mysql connection factory jar (mysql-socket-factory) in the pom
+
+* write down the database name and update the datasource, preferably in aapplication-gcp.yml file
+
+        spring.datasource.url=jdbc:mysql://google/logopicker?cloudSqlInstance=logopicker2:us-east1:logopicker-db&socketFactory=com.google.cloud.sql.mysql.SocketFactory
+
+* requires an app.yaml file at src/main/appengine/app.yaml
+full documentation at : https://cloud.google.com/appengine/docs/flexible/java/configuring-your-app-with-app-yaml#resource-settings
+
+* build and deploy 
+
+        ./mvnw -DskipTests -Pprod,gcp install appengine:deploy
 ### Troubleshooting
 
 #### Query the server
@@ -314,33 +353,6 @@ show tables;
 
 ## Deployment
 
-### Google Cloud Platform
-
-Google app engine from spring boot :
-
-    gcloud config set project my-project-id
-    gcloud components install app-engine-java
-
-2 approches : 
-
-#### War classique
-https://github.com/GoogleCloudPlatform/getting-started-java/tree/master/appengine-standard-java8/springboot-appengine-standard
-* necessite des adaptations par rapport a l app de base spring boot
-  * packaging war
-  * ajouter app engine plugin
-  * commenter et exclure des dependances / plugins
-  * src/main/webapp/WEB-INF/appengine-web.xml
-* probleme avec des services loaders, avec Ehcache et JSR 107 Caching Provider
-
-#### Jar executable qui lancera l application
-https://github.com/GoogleCloudPlatform/getting-started-java/tree/master/helloworld-springboot
-* necessite des adaptations par rapport a l app de base spring boot
-  * ajouter app engine plugin
-  * src/main/appengine/app.yaml
-* important de bien regler les variables d environnement et la taille du container app engine
-* port 8080 !!! ou sinon 502 Bad Gateway du Nninx de GAE
-Documentation pour app.yaml
-https://cloud.google.com/appengine/docs/flexible/java/configuring-your-app-with-app-yaml#resource-settings
 
 #### Connect to Google Cloud Sql
 https://cloud.google.com/appengine/docs/standard/java/cloud-sql/using-cloud-sql-mysq 
