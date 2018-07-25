@@ -150,10 +150,14 @@ public class LogoResource {
         if(environment.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_CLOUD)) {
             return Cloud.CLOUD_FOUNDRY;
         }
+        if(environment.acceptsProfiles("aws")) {
+            return Cloud.AWS;
+        }
         if(System.getenv("GAE_DEPLOYMENT_ID") != null) {
             return Cloud.GOOGLE;
         }
-        if(environment.getProperty("spring.datasource.url").startsWith("jdbc:mysql://localhost:3306")) {
+        if(environment.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) ||
+           environment.getProperty("spring.datasource.url").startsWith("jdbc:mysql://localhost:3306")) {
             return Cloud.LOCALHOST;
         }
 

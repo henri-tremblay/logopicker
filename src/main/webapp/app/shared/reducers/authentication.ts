@@ -6,6 +6,7 @@ import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util'
 export const ACTION_TYPES = {
   LOGIN: 'authentication/LOGIN',
   GET_SESSION: 'authentication/GET_SESSION',
+  FETCH_CURRENT_LOGO: 'logo/FETCH_CURRENT_LOGO',
   LOGOUT: 'authentication/LOGOUT',
   CLEAR_AUTH: 'authentication/CLEAR_AUTH',
   ERROR_MESSAGE: 'authentication/ERROR_MESSAGE'
@@ -32,6 +33,7 @@ export default (state: AuthenticationState = initialState, action): Authenticati
   switch (action.type) {
     case REQUEST(ACTION_TYPES.LOGIN):
     case REQUEST(ACTION_TYPES.GET_SESSION):
+    case REQUEST(ACTION_TYPES.FETCH_CURRENT_LOGO):
       return {
         ...state,
         loading: true
@@ -44,6 +46,7 @@ export default (state: AuthenticationState = initialState, action): Authenticati
         loginError: true
       };
     case FAILURE(ACTION_TYPES.GET_SESSION):
+    case FAILURE(ACTION_TYPES.FETCH_CURRENT_LOGO):
       return {
         ...state,
         loading: false,
@@ -64,7 +67,8 @@ export default (state: AuthenticationState = initialState, action): Authenticati
         ...initialState,
         showModalLogin: true
       };
-    case SUCCESS(ACTION_TYPES.GET_SESSION): {
+    case SUCCESS(ACTION_TYPES.GET_SESSION):
+    case SUCCESS(ACTION_TYPES.FETCH_CURRENT_LOGO): {
       const isAuthenticated = action.payload && action.payload.data && action.payload.data.activated;
       return {
         ...state,
@@ -97,6 +101,12 @@ export const getSession = () => dispatch =>
   dispatch({
     type: ACTION_TYPES.GET_SESSION,
     payload: axios.get('api/account')
+  });
+
+export const getCloudLogo = () => dispatch =>
+  dispatch({
+    type: ACTION_TYPES.FETCH_CURRENT_LOGO,
+    payload: axios.get('api/logos/current')
   });
 
 export const login = (username, password, rememberMe = false) => async (dispatch, getState) => {

@@ -5,6 +5,39 @@ Main page styles
   display: inline-block;
   width: 100%;
   height: 497px;
-  background: url('../../../static/images/logo-jhipster-react.svg') no-repeat center top;
   background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.UNKNOWN {
+  background-image: url(../../../static/logos/unknown.png)
+}
+
+.LOCALHOST {
+  background-image: url(../../../static/logos/localhost.jpg)
+}
+
+.AWS {
+  background-image: url(../../../static/logos/aws.png)
+}
+
+.AZURE {
+  background-image: url(../../../static/logos/azure.png)
+}
+
+.CLOUD_FOUNDRY {
+  background-image: url(../../../static/logos/cloudfoundry.png)
+}
+
+.GOOGLE {
+  background-image: url(../../../static/logos/google.png)
+}
+
+.HEROKU {
+  background-image: url(../../../static/logos/heroku.png)
+}
+
+.ORACLE {
+  background-image: url(../../../static/logos/oracle.png)
 }
