@@ -10,5 +10,5 @@ spec:
     app: logopicker
   type: LoadBalancer
   ports:
-  - name: web
+  - name: http
     port: 8080

@@ -1,24 +1,50 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: logopicker
   namespace: default
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: logopicker
+      version: "1.0"
   template:
     metadata:
       labels:
         app: logopicker
+        version: "1.0"
     spec:
+      initContainers:
+        - name: init-ds
+          image: busybox
+          command:
+            - '/bin/sh'
+            - '-c'
+            - |
+                while true
+                do
+                  rt=$(nc -z -w 1 logopicker-mysql 3306)
+                  if [ $? -eq 0 ]; then
+                    echo "DB is UP"
+                    break
+                  fi
+                  echo "DB is not yet reachable;sleep for 10s before retry"
+                  sleep 10
+                done
       containers:
       - name: logopicker-app
-        image: anthonydahanne/logopicker:latest
-        imagePullPolicy: Always
+        image: henritremblay/logopicker
         env:
         - name: SPRING_PROFILES_ACTIVE
-          value: prod, k8s
+          value: prod
+        - name: JHIPSTER_SECURITY_AUTHENTICATION_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jwt-secret
+              key: secret
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://logopicker-mysql:3306/logopicker
+          value: jdbc:mysql://logopicker-mysql.default.svc.cluster.local:3306/logopicker?useUnicode=true&characterEncoding=utf8&useSSL=false
         - name: JAVA_OPTS
           value: " -Xmx256m -Xms256m"
         resources:
@@ -29,15 +55,17 @@ spec:
             memory: "512Mi"
             cpu: "1"
         ports:
-        - name: web
+        - name: http
           containerPort: 8080
         readinessProbe:
           httpGet:
             path: /management/health
-            port: web
+            port: http
+          initialDelaySeconds: 20
+          periodSeconds: 15
+          failureThreshold: 6
         livenessProbe:
           httpGet:
             path: /management/health
-            port: web
-          initialDelaySeconds: 180
-
+            port: http
+          initialDelaySeconds: 120

@@ -28,6 +28,17 @@
     "testFrameworks": [],
     "jhiPrefix": "jhi",
     "enableTranslation": false,
-    "herokuAppName": "logopicker"
+    "herokuAppName": "logopicker",
+    "appsFolders": [
+      "logopicker"
+    ],
+    "directoryPath": "../",
+    "dockerRepositoryName": "henritremblay",
+    "dockerPushCommand": "docker push",
+    "kubernetesNamespace": "default",
+    "kubernetesServiceType": "LoadBalancer",
+    "monitoring": "no",
+    "istio": "no",
+    "istioRoute": false
   }
 }
