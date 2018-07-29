@@ -156,6 +156,8 @@ You can deploy your apps by running:
 #### Useful commands
 
 * Use these commands to find your application IP address: `kubectl get svc logopicker`
+* See deployed pods: `kubectl get pods`
+* See deployed services `kubectl get pods`
 
 ### Heroku
 
